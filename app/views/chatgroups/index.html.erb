@@ -1,0 +1,40 @@
+<h4 class="my-5">チャットグループ一覧</h4>
+
+
+<div class="mb-3">
+  <%=link_to "グループ新規作成",new_chatgroup_path,class: "btn-primary col-sm-2 mb-5" %>
+  <%= link_to "参加中グループ", join_chatgroups_path,class: "btn-warning col-sm-2 mb-5" %>
+</div>
+
+<table class="table table-hover table-inverse">
+  <thead>
+    <th>グループ画像</th>
+    <th>ルーム名</th>
+    <th>ルーム概要</th>
+    <th>参加人数</th>
+  </thead>
+  <tbody>
+  <% @chatgroups.each do |group| %>
+    <tr>
+      <td><%=link_to chatgroup_path(group.id) do %>
+        <%=image_tag group.get_group_image(100,100)%>
+        <%end%>
+      </td>
+      <td><%=link_to chatgroup_path(group.id) do %>
+        <%=group.group_name%>
+        <%end%>
+      </td>
+      <td><%=link_to chatgroup_path(group.id) do %>
+        <%=group.introduction%>
+        <%end%>
+      </td>
+      <td>(<%=group.user_ids.count%>)</td>
+      <% if current_user.id == group.owner_id %>
+      <td><%=link_to "編集",edit_chatgroup_path(group),class: "btn btn-success"%></td>
+      <td><%=link_to "削除",chatgroup_path(group),method: :delete, class: "btn btn-danger" %></td>
+      <% end %>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+<%= paginate @chatgroups %>

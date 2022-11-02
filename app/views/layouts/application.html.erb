@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PFBacknet</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       <div class="container">
+          <%=link_to image_tag("LOGO.jpg",size:"80x80"),root_path,class:"text-white"%>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+
+
+              <li>
+                <%=link_to user_user_path(current_user.id),class:"nav-link text-light" do %>
+                <i class="fas fa-user"></i>My page
+                <%end%>
+              </li>
+              <li>
+                <%=link_to posts_path,class:"nav-link text-light" do %>
+                <i class="fas fa-blog"></i>Post index
+                <%end%>
+              </li>
+              <li>
+                <%=link_to chatgroups_path,class:"nav-link text-light" do %>
+                <i class="fas fa-comments"></i>Group chat
+                <%end%>
+              </li>
+              <li>
+                <%=link_to destroy_user_session_path,method: :delete,class:"nav-link text-light" do %>
+                <i class="fas fa-sign-out-alt"></i>Log out
+                <%end%>
+              </li>
+
+              <% elsif admin_signed_in? %>
+
+              <li>
+                <%=link_to admin_root_path,class:"nav-link text-light" do %>
+                <i class="fas fa-home"></i>Top
+                <%end%>
+              </li>
+
+               <li>
+                <%=link_to admin_users_path,class:"nav-link text-light" do %>
+                <i class="fas fa-users"></i>users
+                <%end%>
+              </li>
+
+              <li>
+                <%=link_to admin_chatgroups_path,class:"nav-link text-light" do %>
+                <i class="fas fa-comments"></i>Group chat
+                <%end%>
+              </li>
+
+              <li>
+                <%=link_to admin_posts_path,class:"nav-link text-light" do %>
+                <i class="fas fa-blog"></i>Post index
+                <%end%>
+              </li>
+
+               <li>
+                 <%=link_to destroy_admin_session_path,method: :delete,class:"nav-link text-light" do %>
+                 <i class="fas fa-door-open"></i>Admin Logout
+                 <%end%>
+               </li>
+
+               <% else %>
+               <li>
+                <%=link_to root_path,class:"nav-link text-light" do %>
+                <i class="fas fa-home"></i>Top
+                <%end%>
+              </li>
+
+
+              <li>
+                <%=link_to new_admin_session_path,class:"nav-link text-light" do %>
+                <i class="fas fa-baseball-ball"></i>Admin Login
+                <%end%>
+              </li>
+              <%end%>
+
+            </ul>
+          </div>
+
+       </div>
+      </nav>
+    </header>
+    <% if flash[:alert].present? %>
+      <p><%= flash[:alert] %></p>
+    <% end %>
+    <main>
+    <%= yield %>
+    </main>
+     <footer class="bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-12 text-center">
+            <p>~BASEBALL FANS~</p>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </footer>
+
+
+  </body>
+</html>
