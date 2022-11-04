@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
    get 'chatmessages/index'
   namespace :admin do
     root "homes#top"
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   end
   get 'comments/new'
   get 'comments/index'
-  
+
   root :to =>"user/homes#top"
 
 
