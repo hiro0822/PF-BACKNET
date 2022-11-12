@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 2022_11_02_041907) do
   create_table "chatgroups", force: :cascade do |t|
     t.string "group_name", null: false
     t.text "introduction"
+    t.integer "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "owner_id"
   end
 
   create_table "chatmessages", force: :cascade do |t|
