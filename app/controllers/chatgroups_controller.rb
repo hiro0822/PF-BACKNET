@@ -22,7 +22,7 @@ class ChatgroupsController < ApplicationController
 
   def create
     @chatgroup = Chatgroup.new(chatgroup_params)
-    @chatgroup.owner_id = current_user.id
+    @chatgroup.owner_id = 1
       if @chatgroup.save
       redirect_to chatgroups_path, notice: 'チャットグループを作成しました'
       else
